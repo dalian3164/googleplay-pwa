@@ -392,7 +392,7 @@
         // 200ms 更新一次，要持续10秒，就需要50次更新
         // 100% / 50 = 2，所以每次增加2%
         installationTimer = setInterval(() => {
-          installProgress += 2; 
+          installProgress += 2;
           updateInstallButton(installProgress);
           if (installProgress >= 100) {
             clearInterval(installationTimer);
@@ -461,45 +461,38 @@
       };
 
       // 修改启动应用按钮的点击处理函数
-      document.querySelector(".install-btn").addEventListener("click", function () {
-        if (this.classList.contains("launch-btn")) {
-          // 尝试使用不同方式启动应用
-          launchApp();
-        } else {
-          download();
-        }
-      });
+      document
+        .querySelector(".install-btn")
+        .addEventListener("click", function () {
+          if (this.classList.contains("launch-btn")) {
+            // 尝试使用不同方式启动应用
+            launchApp();
+          } else {
+            download();
+          }
+        });
 
       // 添加启动应用的函数
       function launchApp() {
         // 获取 manifest 中定义的 start_url
         const startUrl = "/game/index.html";
-        
-        // 尝试多种方式启动应用
-        if ('startViewTransition' in document) {
-          // 如果支持 View Transitions API，使用它来实现平滑过渡
-          document.startViewTransition(() => {
-            window.location.href = startUrl;
-          });
-        } else {
-          // 1. 尝试使用 PWA protocol handler
+
+        try {
+          window.location.href = `web+pwa://catch_fish_2131243535${startUrl}`;
+        } catch (e) {
+          // 2. 降级方案：直接跳转到 start_url
           try {
-            window.location.href = `web+pwa://catch_fish_2131243535${startUrl}`;
+            window.location.href = startUrl;
           } catch (e) {
-            // 2. 降级方案：直接跳转到 start_url
-            try {
-              window.location.href = startUrl;
-            } catch (e) {
-              // 3. 最后的降级方案：打开新窗口
-              window.open(startUrl, '_blank');
-            }
+            // 3. 最后的降级方案：打开新窗口
+            window.open(startUrl, "_blank");
           }
         }
       }
 
       // 监听 app 安装完成事件
-      window.addEventListener('appinstalled', (event) => {
-        console.log('应用安装完成');
+      window.addEventListener("appinstalled", (event) => {
+        console.log("应用安装完成");
         // 不要立即更新按钮状态，让进度条继续运行完成
         // 如果进度条还没开始，则开始模拟安装进度
         if (installProgress === 0) {
@@ -510,41 +503,45 @@
       // 修改 checkInstalledStatus 函数，添加启动方式检测
       async function checkInstalledStatus() {
         const installBtn = document.querySelector(".install-btn");
-        
-        if ('getInstalledRelatedApps' in navigator) {
+
+        if ("getInstalledRelatedApps" in navigator) {
           try {
             const relatedApps = await navigator.getInstalledRelatedApps();
-            const isInstalled = relatedApps.some(app => app.id === 'catch_fish_2131243535');
-            
+            const isInstalled = relatedApps.some(
+              (app) => app.id === "catch_fish_2131243535"
+            );
+
             if (isInstalled) {
-              console.log('应用已安装');
+              console.log("应用已安装");
               installBtn.innerHTML = "启动应用";
               installBtn.classList.add("launch-btn");
-              
+
               // 检查是否支持 protocol handler
               try {
-                await navigator.registerProtocolHandler('web+pwa',
+                await navigator.registerProtocolHandler(
+                  "web+pwa",
                   `${window.location.origin}/%s`,
-                  'PWA Handler'
+                  "PWA Handler"
                 );
               } catch (e) {
-                console.log('Protocol handler 注册失败:', e);
+                console.log("Protocol handler 注册失败:", e);
               }
             }
           } catch (error) {
-            console.log('检查安装状态时出错:', error);
+            console.log("检查安装状态时出错:", error);
           }
         } else {
           // 降级检查逻辑保持不变
           try {
-            const registration = await navigator.serviceWorker.getRegistration();
+            const registration =
+              await navigator.serviceWorker.getRegistration();
             if (registration) {
-              console.log('发现 Service Worker 注册，可能已安装');
+              console.log("发现 Service Worker 注册，可能已安装");
               installBtn.innerHTML = "启动应用";
               installBtn.classList.add("launch-btn");
             }
           } catch (error) {
-            console.log('Service Worker 检查失败:', error);
+            console.log("Service Worker 检查失败:", error);
           }
         }
       }
