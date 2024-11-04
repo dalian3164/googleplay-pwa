@@ -388,14 +388,17 @@
         const installBtn = document.querySelector(".install-btn");
         installBtn.disabled = true; // 安装过程中禁用按钮
 
+        // 计算每次增加的进度值，使总时间约为10秒
+        // 200ms 更新一次，要持续10秒，就需要50次更新
+        // 100% / 50 = 2，所以每次增加2%
         installationTimer = setInterval(() => {
-          installProgress += 5; // 减慢进度速度
+          installProgress += 2; 
           updateInstallButton(installProgress);
           if (installProgress >= 100) {
             clearInterval(installationTimer);
-            installBtn.disabled = false; // 安装完成后启用按钮
+            installBtn.disabled = false;
           }
-        }, 200);
+        }, 200); // 200ms 更新一次，50次更新共10秒
       }
 
       function download() {
@@ -426,6 +429,7 @@
           window.deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === "accepted") {
               console.log("user accepted the A2HS prompt");
+              // 开始模拟安装进度
               simulateInstallProgress();
             } else {
               console.log("user dismissed the A2HS prompt");
@@ -471,16 +475,10 @@
       // 监听 app 安装完成事件
       window.addEventListener('appinstalled', (event) => {
         console.log('应用安装完成');
-        const installBtn = document.querySelector(".install-btn");
-        
-        // 更新按钮状态为启动应用
-        installBtn.innerHTML = "启动应用";
-        installBtn.classList.add("launch-btn");
-        installBtn.disabled = false;
-        
-        // 清除可能还在运行的进度条计时器
-        if (installationTimer) {
-          clearInterval(installationTimer);
+        // 不要立即更新按钮状态，让进度条继续运行完成
+        // 如果进度条还没开始，则开始模拟安装进度
+        if (installProgress === 0) {
+          simulateInstallProgress();
         }
       });
 
