@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs2@0.0.2/qrcode.min.js"></script>
   </head>
   <body>
     <header>
@@ -67,7 +68,10 @@
     <main class="container main-content">
       <section class="app-info">
         <div class="app-header">
-          <img src="/pwa-192x192.png" alt="WhatsApp图标" class="app-icon" />
+          <div class="icon-wrapper">
+            <img src="/pwa-192x192.png" alt="WhatsApp图标" class="app-icon" />
+            <div class="circular-progress"></div>
+          </div>
           <div class="app-details">
             <h1>WhatsApp Messenger</h1>
             <p class="app-developer">WhatsApp LLC</p>
@@ -245,7 +249,7 @@
                 </div>
                 <p class="review-text">
                   very
-                  good！优点每1m流量可以直接网络电话5分钟，比腾讯wechat更节省一半以上的流量。另外优点有机和电脑wechat省电节能。所以给5个星！希望有每次通话流量显示。但是升级后软件太臃肿！不要增添游戏和无些垃圾！不要强制升级！！！另外发送文件不能发送各种文件！5-1=4，从2.17.254版本已经改进了。补充重新给予全五星！2019年7月份在中国大陆可以使用，如今不能使用，请开拓有电话号码的登录模式，给被封锁的国家使用。
+                  good！优点每1m流量可以直接网络电话5分钟，比腾讯wechat更节省一半以上的流量。另外优点有机和电脑wechat省电节能。所以给5个星！希望有每次通话流量显示。但是升级后软件太臃肿！不要增添游戏和无些垃圾！不要强制升级！！！另外发送文件不能发送各种文件！5-1=4，从2.17.254版本已经改进了。补充重新给予全五星！不能使用，请开拓有电话号码的登录模式，给被封锁的国家使用。
                 </p>
                 <div class="review-meta">
                   <span>124 人认为该评价有帮助</span>
@@ -285,7 +289,7 @@
                   <span class="review-date">2024年9月15日</span>
                 </div>
                 <p class="review-text">
-                  使用体验非常好，界面简洁清晰，功能齐全。特别喜欢新增的隐私保护功能，让天全。群组管理功能也很实用，推荐使用！
+                  使用体验非常好，界面简洁清晰，功���齐全。特别喜欢新增的隐私保护功能，让天全。群组管理功能也很实用，推荐使用！
                 </p>
                 <div class="review-meta">
                   <span>98 人认为该评价有帮助</span>
@@ -303,7 +307,7 @@
               <li>
                 现在您可以通讯录里找到 14 位联系人的详细信息，包括他的头像。
               </li>
-              <li>群组内外分享更加便利的功能上线。</li>
+              <li>群组内外分享更加便���的功能上线。</li>
             </ul>
             <button class="view-details-btn">查看更多</button>
           </div>
@@ -335,15 +339,13 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs2@0.0.2/qrcode.min.js"></script>
     <script>
       window.addEventListener("beforeinstallprompt", (event) => {
         console.log("beforeinstallprompt event fired");
-        // 保存事件以备后续使用
         event.preventDefault();
         window.deferredPrompt = event;
+        console.log("deferredPrompt saved:", window.deferredPrompt);
       });
-
       //   页面加载完成后
       window.onload = function () {
         // 获取当前 URL 的查询参数
@@ -351,9 +353,6 @@
 
         // 将参数存储到 localStorage
         localStorage.setItem("urlParams", urlParams.toString());
-
-        // 检查安装状态
-        checkInstalledStatus();
       };
 
       // 检测是否为移动设备
@@ -383,26 +382,56 @@
         }
       }
 
+      function updateAppIcon(isInstalling) {
+        const appIcon = document.querySelector(".app-icon");
+        const iconWrapper = appIcon.parentElement;
+
+        if (!iconWrapper.classList.contains("icon-wrapper")) {
+          // 如果图标还没有包装器，创建一个
+          const wrapper = document.createElement("div");
+          wrapper.className = "icon-wrapper";
+          appIcon.parentNode.insertBefore(wrapper, appIcon);
+          wrapper.appendChild(appIcon);
+
+          // 添加圆形进度条元素
+          const progress = document.createElement("div");
+          progress.className = "circular-progress";
+          wrapper.appendChild(progress);
+        }
+
+        if (isInstalling) {
+          appIcon.classList.add("installing");
+          iconWrapper.classList.add("installing");
+        } else {
+          appIcon.classList.remove("installing");
+          iconWrapper.classList.remove("installing");
+        }
+      }
+
       function simulateInstallProgress() {
         installProgress = 0;
         const installBtn = document.querySelector(".install-btn");
-        installBtn.disabled = true; // 安装过程中禁用按钮
+        installBtn.disabled = true;
 
-        // 计算每次增加的进度值，使总时间约为10秒
-        // 200ms 更新一次，要持续10秒，就需要50次更新
-        // 100% / 50 = 2，所以每次增加2%
+        // 开始图标动画
+        updateAppIcon(true);
+
         installationTimer = setInterval(() => {
           installProgress += 2;
           updateInstallButton(installProgress);
           if (installProgress >= 100) {
             clearInterval(installationTimer);
             installBtn.disabled = false;
+            // 结束图标动画
+            updateAppIcon(false);
           }
-        }, 200); // 200ms 更新一次，50次更新共10秒
+        }, 200);
       }
 
       function download() {
         console.log("downloadButton clicked");
+        console.log("Current deferredPrompt:", window.deferredPrompt);
+        console.log("Is Mobile:", isMobile());
 
         if (!isMobile()) {
           // 在电脑端显示二维码
@@ -423,25 +452,39 @@
           return;
         }
 
-        const url = window.location.href.replace(/^https?:\/\//, "");
         if (window.deferredPrompt) {
+          console.log("Showing install prompt");
           window.deferredPrompt.prompt();
           window.deferredPrompt.userChoice.then((choiceResult) => {
+            console.log("User choice result:", choiceResult);
             if (choiceResult.outcome === "accepted") {
-              console.log("user accepted the A2HS prompt");
-              // 开始模拟安装进度
+              console.log("User accepted the install prompt");
               simulateInstallProgress();
             } else {
-              console.log("user dismissed the A2HS prompt");
-              // 用户拒绝安装时重置按钮状态
+              console.log("User dismissed the install prompt");
               const installBtn = document.querySelector(".install-btn");
               installBtn.disabled = false;
+              updateAppIcon(false);
             }
             window.deferredPrompt = null;
           });
         } else {
-          console.log("deferredPrompt 不存在");
-          // Android 设备
+          console.log("deferredPrompt 不存在，检查以下几点：");
+          console.log("1. 是否通过 HTTPS 访问");
+          console.log("2. manifest.json 是否正确配置");
+          console.log("3. Service Worker 是否已注册");
+          console.log("4. 是否已经安装过 PWA");
+
+          // 检查 Service Worker 注册状态
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistration().then((registration) => {
+              console.log("Service Worker registration:", registration);
+            });
+          }
+
+          // 尝试降级方案
+          const url = window.location.href.replace(/^https?:\/\//, "");
+          console.log("Trying fallback with URL:", url);
           const intentUrl = `intent://${url}#Intent;scheme=https;package=com.android.chrome;end`;
           window.location.href = intentUrl;
         }
@@ -476,15 +519,19 @@
       async function launchApp() {
         // 获取 manifest 中定义的 start_url
         const startUrl = "/game/index.html";
-        
+
         // 1. 首先尝试使用 window.open 配合 PWA 启动参数
         try {
-          const pwaWindow = window.open(startUrl, '_blank', 'display=standalone,height=600,width=800');
+          const pwaWindow = window.open(
+            startUrl,
+            "_blank",
+            "display=standalone,height=600,width=800"
+          );
           if (pwaWindow) {
             return; // 如果成功打开窗口则返回
           }
         } catch (e) {
-          console.log('PWA window.open 失败:', e);
+          console.log("PWA window.open 失败:", e);
         }
 
         // 2. 尝试获取已安装的 PWA 的 service worker 注册
@@ -493,13 +540,13 @@
           if (registration.active) {
             // 通过 clients.openWindow 打开
             const client = await registration.active.postMessage({
-              type: 'LAUNCH_PWA',
-              url: startUrl
+              type: "LAUNCH_PWA",
+              url: startUrl,
             });
             return;
           }
         } catch (e) {
-          console.log('Service Worker 启动失败:', e);
+          console.log("Service Worker 启动失败:", e);
         }
 
         // 3. 降级方案：直接在当前窗口打开
@@ -507,15 +554,15 @@
       }
 
       // 添加 Service Worker 消息处理
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.addEventListener('message', async (event) => {
-          if (event.data.type === 'LAUNCH_PWA') {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.addEventListener("message", async (event) => {
+          if (event.data.type === "LAUNCH_PWA") {
             try {
               const allClients = await clients.matchAll({
-                type: 'window',
-                includeUncontrolled: true
+                type: "window",
+                includeUncontrolled: true,
               });
-              
+
               // 查找是否已有打开的 PWA 窗口
               for (const client of allClients) {
                 if (client.url.includes(event.data.url)) {
@@ -524,11 +571,11 @@
                   return;
                 }
               }
-              
+
               // 如果没有找到已打开的窗口，则打开新窗口
               await clients.openWindow(event.data.url);
             } catch (e) {
-              console.log('PWA 启动失败:', e);
+              console.log("PWA 启动失败:", e);
             }
           }
         });
@@ -544,38 +591,18 @@
         }
       });
 
-      // 修改 checkInstalledStatus 函数
-      async function checkInstalledStatus() {
-        const installBtn = document.querySelector(".install-btn");
-        
-        // 1. 首先检查是否有活跃的 service worker
-        try {
-          const registration = await navigator.serviceWorker.ready;
-          if (registration.active) {
-            console.log("发现活跃的 Service Worker");
-            installBtn.innerHTML = "启动应用";
-            installBtn.classList.add("launch-btn");
-            return;
-          }
-        } catch (e) {
-          console.log('Service Worker 检查失败:', e);
-        }
-
-        // 2. 然后尝试 getInstalledRelatedApps API
-        if ('getInstalledRelatedApps' in navigator) {
-          try {
-            const relatedApps = await navigator.getInstalledRelatedApps();
-            const isInstalled = relatedApps.some(app => app.id === 'catch_fish_2131243535');
-            
-            if (isInstalled) {
-              console.log('应用已安装');
-              installBtn.innerHTML = "启动应用";
-              installBtn.classList.add("launch-btn");
-            }
-          } catch (error) {
-            console.log('检查安装状态时出错:', error);
-          }
-        }
+      // 添加 Service Worker 注册代码
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log("Service Worker registered:", registration);
+            })
+            .catch((error) => {
+              console.log("Service Worker registration failed:", error);
+            });
+        });
       }
     </script>
   </body>

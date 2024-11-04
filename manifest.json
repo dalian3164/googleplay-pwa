@@ -1,13 +1,13 @@
 {
-  "name": "应用名",
-  "short_name": "短名",
+  "name": "游戏名",
+  "short_name": "游戏短名",
   "start_url": "/game/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "lang": "en",
   "scope": "/",
   "id": "catch_fish_2131243535",
-  "description": "应用描述",
+  "description": "游戏描述",
   "theme_color": "#ffffff",
   "icons": [
     {
@@ -62,13 +62,5 @@
       "form_factor": "wide",
       "label": ""
     }
-  ],
-  "related_applications": [
-    {
-      "platform": "webapp",
-      "url": "https://googleplay-pwa.vercel.app//manifest.json",
-      "id": "catch_fish_2131243535"
-    }
-  ],
-  "prefer_related_applications": false
+  ]
 }
