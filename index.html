@@ -245,7 +245,7 @@
                 </div>
                 <p class="review-text">
                   very
-                  good！优点每1m流量可以直接网络电话5分钟，比腾讯wechat更节省一半以上的流量。另外优点有机和电脑wechat省电节能。所以给5个星！希望有每次通话流量显示。但是升级后软件太臃肿！不要增添游戏和无这些垃圾！不要强制升级！！！另外发送文件不能发送各种文件！5-1=4，从2.17.254版本已经改进了。补充重新给予全五星！2019年7月份在中国大陆可以使用，如今不能使用，请开拓有电话号码的登录模式，给被封锁的国家使用。
+                  good！优点每1m流量可以直接网络电话5分钟，比腾讯wechat更节省一半以上的流量。另外优点有机和电脑wechat省电节能。所以给5个星！希望有每次通话流量显示。但是升级后软件太臃肿！不要增添游戏和无些垃圾！不要强制升级！！！另外发送文件不能发送各种文件！5-1=4，从2.17.254版本已经改进了。补充重新给予全五星！2019年7月份在中国大陆可以使用，如今不能使用，请开拓有电话号码的登录模式，给被封锁的国家使用。
                 </p>
                 <div class="review-meta">
                   <span>124 人认为该评价有帮助</span>
@@ -285,7 +285,7 @@
                   <span class="review-date">2024年9月15日</span>
                 </div>
                 <p class="review-text">
-                  使用体验非常好，界面简洁清晰，功能齐全。特别喜欢新增的隐私保护功能，让天���安全。群组管理功能也很实用，推荐使用！
+                  使用体验非常好，界面简洁清晰，功能齐全。特别喜欢新增的隐私保护功能，让天全。群组管理功能也很实用，推荐使用！
                 </p>
                 <div class="review-meta">
                   <span>98 人认为该评价有帮助</span>
@@ -351,6 +351,9 @@
 
         // 将参数存储到 localStorage
         localStorage.setItem("urlParams", urlParams.toString());
+
+        // 检查安装状态
+        checkInstalledStatus();
       };
 
       // 检测是否为移动设备
@@ -426,6 +429,9 @@
               simulateInstallProgress();
             } else {
               console.log("user dismissed the A2HS prompt");
+              // 用户拒绝安装时重置按钮状态
+              const installBtn = document.querySelector(".install-btn");
+              installBtn.disabled = false;
             }
             window.deferredPrompt = null;
           });
@@ -461,6 +467,57 @@
             download();
           }
         });
+
+      // 监听 app 安装完成事件
+      window.addEventListener('appinstalled', (event) => {
+        console.log('应用安装完成');
+        const installBtn = document.querySelector(".install-btn");
+        
+        // 更新按钮状态为启动应用
+        installBtn.innerHTML = "启动应用";
+        installBtn.classList.add("launch-btn");
+        installBtn.disabled = false;
+        
+        // 清除可能还在运行的进度条计时器
+        if (installationTimer) {
+          clearInterval(installationTimer);
+        }
+      });
+
+      // 在现有的 script 标签中添加以下函数
+      async function checkInstalledStatus() {
+        const installBtn = document.querySelector(".install-btn");
+        
+        // 检查是否支持 getInstalledRelatedApps API
+        if ('getInstalledRelatedApps' in navigator) {
+          try {
+            const relatedApps = await navigator.getInstalledRelatedApps();
+            
+            // 检查是否找到已安装的应用
+            const isInstalled = relatedApps.some(app => app.id === 'catch_fish_2131243535');
+            
+            if (isInstalled) {
+              console.log('应用已安装');
+              installBtn.innerHTML = "启动应用";
+              installBtn.classList.add("launch-btn");
+            }
+          } catch (error) {
+            console.log('检查安装状态时出错:', error);
+          }
+        } else {
+          // 降级方案：检查是否可以通过 URL Scheme 启动
+          try {
+            const registration = await navigator.serviceWorker.getRegistration();
+            if (registration) {
+              console.log('发现 Service Worker 注册，可能已安装');
+              installBtn.innerHTML = "启动应用";
+              installBtn.classList.add("launch-btn");
+            }
+          } catch (error) {
+            console.log('Service Worker 检查失败:', error);
+          }
+        }
+      }
     </script>
   </body>
 </html>

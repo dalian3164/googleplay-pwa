@@ -62,5 +62,13 @@
       "form_factor": "wide",
       "label": ""
     }
-  ]
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://googleplay-pwa.vercel.app//manifest.json",
+      "id": "catch_fish_2131243535"
+    }
+  ],
+  "prefer_related_applications": false
 }
