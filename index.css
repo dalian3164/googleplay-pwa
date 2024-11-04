@@ -125,13 +125,8 @@ header {
 .app-icon {
   width: 120px;
   height: 120px;
-  margin-right: 20px;
   border-radius: 20px;
   transition: all 0.3s ease;
-}
-
-.app-icon.installing {
-  transform: scale(1);
 }
 
 .icon-wrapper {
@@ -140,6 +135,7 @@ header {
   width: 120px;
   height: 120px;
   display: flex;
+  margin-right: 16px;
   align-items: center;
   justify-content: center;
 }
@@ -605,7 +601,6 @@ header {
   .app-icon {
     width: 80px;
     height: 80px;
-    margin-right: 16px;
   }
 
   .app-details h1 {
@@ -822,12 +817,6 @@ header {
   .install-btn,
   .install-btn.launch-btn {
     padding: 0;
-  }
-
-  .app-icon {
-    width: 80px;
-    height: 80px;
-    margin-right: 16px;
   }
 
   .app-icon.installing {
