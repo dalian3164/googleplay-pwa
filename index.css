@@ -831,7 +831,7 @@ header {
   }
 
   .app-icon.installing {
-    transform: scale(0.8);
+    transform: scale(0.5);
   }
 
   .icon-wrapper {
@@ -845,17 +845,26 @@ header {
 
   .circular-progress {
     position: absolute;
-    width: 90px;
-    height: 90px;
-    top: 50%;
-    left: 50%;
+    width: 80px;
+    height: 80px;
+    top: 40px;
+    left: 40px;
     border-radius: 50%;
-    border: 2px solid rgba(59, 133, 98, 0.2);
+    border: 4px solid rgba(59, 133, 98, 0.2);
     border-top-color: rgb(59, 133, 98);
     opacity: 0;
     transition: opacity 0.3s ease;
     transform: translate(-50%, -50%);
     animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
