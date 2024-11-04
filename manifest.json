@@ -1,0 +1,66 @@
+{
+  "name": "应用名",
+  "short_name": "短名",
+  "start_url": "/game/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en",
+  "scope": "/",
+  "id": "catch_fish_2131243535",
+  "description": "应用描述",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "pwa-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./pwa-narrow-1.png",
+      "type": "image/png",
+      "sizes": "320x500",
+      "form_factor": "narrow",
+      "label": ""
+    },
+    {
+      "src": "./pwa-narrow-2.png",
+      "type": "image/png",
+      "sizes": "320x500",
+      "form_factor": "narrow",
+      "label": ""
+    },
+    {
+      "src": "./pwa-narrow-3.png",
+      "type": "image/png",
+      "sizes": "320x500",
+      "form_factor": "narrow",
+      "label": ""
+    },
+    {
+      "src": "./pwa-wide-1.png",
+      "type": "image/png",
+      "sizes": "960x600",
+      "form_factor": "wide",
+      "label": ""
+    }
+  ]
+}

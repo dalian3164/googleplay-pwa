@@ -1,0 +1,819 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #202124;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  border-bottom: 1px solid #dadce0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 60px;
+  padding-top: 5px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 16px;
+  justify-content: space-between; /* Add this */
+}
+
+/* Add these new styles */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: 16px;
+  opacity: 0.7;
+}
+
+.search-icon:hover {
+  opacity: 1;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #5f6368;
+  font-size: 22px;
+  margin-right: 24px;
+  white-space: nowrap;
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+.logo svg {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
+.main-nav {
+  flex-grow: 1;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+.nav-link {
+  color: #5f6368;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 4px;
+  position: relative;
+}
+
+.nav-link.active {
+  color: #1a73e8;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #1a73e8;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.app-info {
+  flex: 2;
+  padding-right: 20px;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.app-icon {
+  width: 120px;
+  height: 120px;
+  margin-right: 20px;
+  border-radius: 20px;
+}
+
+.app-details h1 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.app-developer {
+  color: #5f6368;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.app-rating {
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  color: #fbbc05;
+  font-size: 18px;
+}
+
+.rating-count {
+  color: #5f6368;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.app-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.rating,
+.downloads,
+.age-rating {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #5f6368;
+  margin-top: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.install-btn {
+  background-color: rgb(59, 133, 98);
+  color: white;
+  border: none;
+  padding: 12px 48px;
+  border-radius: 10px;
+  font-weight: 500;
+  min-width: 200px;
+}
+
+.share-btn,
+.wishlist-btn {
+  background: none;
+  border: none;
+  color: #1a73e8;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.compatibility {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5f6368;
+  margin-bottom: 24px;
+}
+
+.app-details-section {
+  margin-top: 24px;
+}
+
+.detail-section {
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.arrow {
+  margin-left: 8px;
+  color: #5f6368;
+}
+
+.section-content {
+  font-size: 14px;
+  color: #5f6368;
+  line-height: 1.5;
+}
+
+/* Screenshots */
+.screenshots {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 280px;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px 0;
+  width: 1000px;
+}
+
+.screenshot {
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Security Features */
+.security-features {
+  list-style: none;
+  margin: 16px 0;
+}
+
+.security-features li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.feature-text {
+  margin-left: 12px;
+}
+
+.feature-text h3 {
+  font-size: 14px;
+  color: #202124;
+  margin-bottom: 4px;
+}
+
+/* Review Items */
+.review-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #dadce0;
+  align-items: flex-start;
+}
+
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.review-avatar:nth-child(1) {
+  background-color: #4285f4; /* Google Blue */
+}
+
+.review-avatar:nth-child(2) {
+  background-color: #ea4335; /* Google Red */
+}
+
+.review-avatar:nth-child(3) {
+  background-color: #34a853; /* Google Green */
+}
+
+.review-avatar:nth-child(4) {
+  background-color: #fbbc05; /* Google Yellow */
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.review-rating {
+  color: #fbbc05;
+}
+
+.review-date {
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.review-text {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.review-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: #1a73e8;
+  cursor: pointer;
+}
+
+/* View Details Button */
+.view-details-btn {
+  color: #1a73e8;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+/* Reviews Section */
+.reviews-section {
+  padding: 24px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.verified-badge {
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.device-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+
+.device-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #dadce0;
+  background: none;
+  color: #5f6368;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.device-btn.active {
+  background-color: #e8f0fe;
+  border-color: #1a73e8;
+  color: #1a73e8;
+}
+
+/* Rating Overview */
+.rating-overview {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.rating-left {
+  text-align: center;
+  min-width: 150px;
+}
+
+.rating-big {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.rating-stars {
+  color: #fbbc05;
+  font-size: 24px;
+  margin: 4px 0;
+}
+
+.rating-count {
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.rating-bars {
+  flex-grow: 1;
+}
+
+.rating-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.star-level {
+  min-width: 20px;
+  text-align: right;
+}
+
+.bar-container {
+  flex-grow: 1;
+  height: 16px;
+  background-color: #f1f3f4;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: #34a853;
+  border-radius: 8px;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top: 1px solid #dadce0;
+}
+
+.mobile-nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.mobile-nav li {
+  flex: 1;
+  text-align: center;
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 12px 0;
+  text-decoration: none;
+  color: #5f6368;
+  font-size: 12px;
+}
+
+.mobile-nav a.active {
+  color: #1a73e8;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  /* Header Adjustments */
+  header {
+    border: none;
+  }
+
+  .header-content {
+    padding: 0 8px;
+  }
+  .search-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 12px;
+  }
+  .main-nav {
+    display: none;
+  }
+
+  .logo {
+    position: static;
+    margin-right: 16px;
+  }
+
+  .logo svg {
+    width: 33px;
+    height: 33px;
+  }
+
+  .logo span {
+    font-size: 22px;
+  }
+
+  /* Main Content Adjustments */
+  .main-content {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .app-info {
+    width: 100%;
+    padding: 0;
+  }
+
+  .app-header {
+    padding: 16px;
+  }
+
+  .app-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 16px;
+  }
+
+  .app-details h1 {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+
+  .app-developer {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .app-stats {
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .rating,
+  .downloads,
+  .age-rating {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+  }
+
+  /* Action Buttons Adjustments */
+  .action-buttons {
+    margin: 16px;
+    flex-wrap: wrap;
+  }
+
+  .install-btn {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .share-btn,
+  .wishlist-btn {
+    padding: 8px;
+  }
+
+  /* Compatibility Info Adjustments */
+  .compatibility {
+    padding: 0 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  /* Screenshots Adjustments */
+  .screenshots {
+    width: 100%;
+    padding: 16px;
+    gap: 8px;
+    grid-auto-columns: 200px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .screenshots::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screenshot {
+    width: 200px;
+    border-radius: 8px;
+  }
+
+  /* Reviews Section Adjustments */
+  .reviews-section {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .device-filters {
+    display: none;
+  }
+
+  .rating-overview {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    display: block;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    border-top: 1px solid #dadce0;
+    padding: 4px 0;
+  }
+
+  .mobile-nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+  }
+
+  .mobile-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #5f6368;
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .mobile-nav a::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+
+  /* 游戏图标 */
+  .mobile-nav li:nth-child(1) a::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6368'%3E%3Cpath d='M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E");
+  }
+
+  /* 应用图标 */
+  .mobile-nav li:nth-child(2) a::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6368'%3E%3Cpath d='M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z'/%3E%3C/svg%3E");
+  }
+
+  /* 电影图标 */
+  .mobile-nav li:nth-child(3) a::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6368'%3E%3Cpath d='M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z'/%3E%3C/svg%3E");
+  }
+
+  /* 图书图标 */
+  .mobile-nav li:nth-child(4) a::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6368'%3E%3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E%3C/svg%3E");
+  }
+
+  /* 儿童图标 */
+  .mobile-nav li:nth-child(5) a::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235f6368'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88C7.55 15.8 9.68 15 12 15s4.45.8 6.14 2.12C16.43 19.18 14.03 20 12 20z'/%3E%3C/svg%3E");
+  }
+
+  /* Content Bottom Padding to avoid being hidden by nav */
+  .app-details-section {
+    padding-bottom: 60px;
+  }
+}
+
+/* 模态框样式 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 30px;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #000;
+}
+
+#qrcode {
+  position: relative;
+  width: 256px;
+  height: 256px;
+  margin: 30px auto;
+  padding: 12px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #1a73e8;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+/* 安装按钮和进度条样式 */
+.progress-bar {
+  width: 100%;
+  height: 36px;
+  background: #e8f0fe;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  background: #1a73e8;
+  transition: width 0.5s ease;
+  border-radius: 18px;
+}
+
+.progress-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.launch-btn {
+  background: #34a853 !important;
+}
+
+.launch-btn:hover {
+  background: #2d9348 !important;
+}

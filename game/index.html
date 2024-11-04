@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+<h1>游戏页面</h1>
+<div id="urlParams"></div>
+<script>
+    //   页面加载完成后
+    window.onload = function () {
+        // 从 localStorage 获取参数
+        const storedParams = localStorage.getItem("urlParams");
+
+        if (storedParams) {
+            const gameUrlParams = new URLSearchParams(storedParams);
+
+            // 示例：输出参数值
+            gameUrlParams.forEach((value, key) => {
+                const urlParams = document.getElementById("urlParams");
+                urlParams.innerHTML += `${key}: ${value}<br>`;
+            });
+
+            // 使用完参数后清除存储的参数（可选）
+            // localStorage.removeItem("urlParams");
+        }
+    };
+</script>
+</body>
+</html>
