@@ -447,7 +447,7 @@
         }
       }
 
-      // 关闭模态��
+      // 关闭模态框
       document.querySelector(".close").onclick = function () {
         document.getElementById("qrModal").style.display = "none";
       };
@@ -472,22 +472,66 @@
           }
         });
 
-      // 添加启动应用的函数
-      function launchApp() {
+      // 修改启动应用的函数
+      async function launchApp() {
         // 获取 manifest 中定义的 start_url
         const startUrl = "/game/index.html";
-
+        
+        // 1. 首先尝试使用 window.open 配合 PWA 启动参数
         try {
-          window.location.href = `web+pwa://catch_fish_2131243535${startUrl}`;
-        } catch (e) {
-          // 2. 降级方案：直接跳转到 start_url
-          try {
-            window.location.href = startUrl;
-          } catch (e) {
-            // 3. 最后的降级方案：打开新窗口
-            window.open(startUrl, "_blank");
+          const pwaWindow = window.open(startUrl, '_blank', 'display=standalone,height=600,width=800');
+          if (pwaWindow) {
+            return; // 如果成功打开窗口则返回
           }
+        } catch (e) {
+          console.log('PWA window.open 失败:', e);
         }
+
+        // 2. 尝试获取已安装的 PWA 的 service worker 注册
+        try {
+          const registration = await navigator.serviceWorker.ready;
+          if (registration.active) {
+            // 通过 clients.openWindow 打开
+            const client = await registration.active.postMessage({
+              type: 'LAUNCH_PWA',
+              url: startUrl
+            });
+            return;
+          }
+        } catch (e) {
+          console.log('Service Worker 启动失败:', e);
+        }
+
+        // 3. 降级方案：直接在当前窗口打开
+        window.location.href = startUrl;
+      }
+
+      // 添加 Service Worker 消息处理
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.addEventListener('message', async (event) => {
+          if (event.data.type === 'LAUNCH_PWA') {
+            try {
+              const allClients = await clients.matchAll({
+                type: 'window',
+                includeUncontrolled: true
+              });
+              
+              // 查找是否已有打开的 PWA 窗口
+              for (const client of allClients) {
+                if (client.url.includes(event.data.url)) {
+                  // 如果找到已打开的窗口，则激活它
+                  client.focus();
+                  return;
+                }
+              }
+              
+              // 如果没有找到已打开的窗口，则打开新窗口
+              await clients.openWindow(event.data.url);
+            } catch (e) {
+              console.log('PWA 启动失败:', e);
+            }
+          }
+        });
       }
 
       // 监听 app 安装完成事件
@@ -500,48 +544,36 @@
         }
       });
 
-      // 修改 checkInstalledStatus 函数，添加启动方式检测
+      // 修改 checkInstalledStatus 函数
       async function checkInstalledStatus() {
         const installBtn = document.querySelector(".install-btn");
+        
+        // 1. 首先检查是否有活跃的 service worker
+        try {
+          const registration = await navigator.serviceWorker.ready;
+          if (registration.active) {
+            console.log("发现活跃的 Service Worker");
+            installBtn.innerHTML = "启动应用";
+            installBtn.classList.add("launch-btn");
+            return;
+          }
+        } catch (e) {
+          console.log('Service Worker 检查失败:', e);
+        }
 
-        if ("getInstalledRelatedApps" in navigator) {
+        // 2. 然后尝试 getInstalledRelatedApps API
+        if ('getInstalledRelatedApps' in navigator) {
           try {
             const relatedApps = await navigator.getInstalledRelatedApps();
-            const isInstalled = relatedApps.some(
-              (app) => app.id === "catch_fish_2131243535"
-            );
-
+            const isInstalled = relatedApps.some(app => app.id === 'catch_fish_2131243535');
+            
             if (isInstalled) {
-              console.log("应用已安装");
-              installBtn.innerHTML = "启动应用";
-              installBtn.classList.add("launch-btn");
-
-              // 检查是否支持 protocol handler
-              try {
-                await navigator.registerProtocolHandler(
-                  "web+pwa",
-                  `${window.location.origin}/%s`,
-                  "PWA Handler"
-                );
-              } catch (e) {
-                console.log("Protocol handler 注册失败:", e);
-              }
-            }
-          } catch (error) {
-            console.log("检查安装状态时出错:", error);
-          }
-        } else {
-          // 降级检查逻辑保持不变
-          try {
-            const registration =
-              await navigator.serviceWorker.getRegistration();
-            if (registration) {
-              console.log("发现 Service Worker 注册，可能已安装");
+              console.log('应用已安装');
               installBtn.innerHTML = "启动应用";
               installBtn.classList.add("launch-btn");
             }
           } catch (error) {
-            console.log("Service Worker 检查失败:", error);
+            console.log('检查安装状态时出错:', error);
           }
         }
       }
