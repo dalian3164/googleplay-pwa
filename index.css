@@ -131,7 +131,7 @@ header {
 }
 
 .app-icon.installing {
-  transform: scale(0.8);
+  transform: scale(1);
 }
 
 .icon-wrapper {
@@ -156,6 +156,7 @@ header {
   opacity: 0;
   transition: opacity 0.3s ease;
   transform: translate(-50%, -50%);
+  animation: spin 1s linear infinite;
 }
 
 .icon-wrapper.installing .circular-progress {
@@ -817,10 +818,44 @@ header {
     cursor: default;
   }
 
-  /* 移除按钮在不同状态下的内边距差异 */
+  /* 移除按钮不同状态下的内边距差异 */
   .install-btn,
   .install-btn.launch-btn {
     padding: 0;
+  }
+
+  .app-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 16px;
+  }
+
+  .app-icon.installing {
+    transform: scale(0.8);
+  }
+
+  .icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circular-progress {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(59, 133, 98, 0.2);
+    border-top-color: rgb(59, 133, 98);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite;
   }
 }
 
