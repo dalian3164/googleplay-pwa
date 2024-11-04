@@ -190,9 +190,14 @@ header {
   color: white;
   border: none;
   padding: 12px 48px;
-  border-radius: 10px;
+  border-radius: 24px;
   font-weight: 500;
   min-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+.install-btn:hover {
+  background-color: rgb(51, 115, 85);
 }
 
 .share-btn,
@@ -783,21 +788,21 @@ header {
   }
 }
 
-/* 安装按钮和进度条样式 */
+/* 修改进度条样式 */
 .progress-bar {
   width: 100%;
-  height: 36px;
-  background: #e8f0fe;
-  border-radius: 18px;
+  height: 48px;
+  background: rgba(59, 133, 98, 0.2);
+  border-radius: 24px;
   overflow: hidden;
   position: relative;
 }
 
 .progress {
   height: 100%;
-  background: #1a73e8;
+  background: rgb(59, 133, 98);
   transition: width 0.5s ease;
-  border-radius: 18px;
+  border-radius: 24px;
 }
 
 .progress-text {
@@ -808,12 +813,20 @@ header {
   color: #fff;
   font-weight: 500;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
 }
 
+/* 启动按钮样式 */
 .launch-btn {
-  background: #34a853 !important;
+  background: rgb(59, 133, 98) !important;
 }
 
 .launch-btn:hover {
-  background: #2d9348 !important;
+  background: rgb(51, 115, 85) !important;
+}
+
+/* 禁用状态样式 */
+.install-btn:disabled {
+  opacity: 0.8;
+  cursor: default;
 }

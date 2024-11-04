@@ -447,7 +447,7 @@
         }
       }
 
-      // 关闭模态框
+      // 关闭模态��
       document.querySelector(".close").onclick = function () {
         document.getElementById("qrModal").style.display = "none";
       };
@@ -460,17 +460,42 @@
         }
       };
 
-      // 处理启动应用按钮点击
-      document
-        .querySelector(".install-btn")
-        .addEventListener("click", function () {
-          if (this.classList.contains("launch-btn")) {
-            // 启动已安装的应用
-            window.location.href = "whatsapp://"; // 使用应用的URL Scheme
-          } else {
-            download();
+      // 修改启动应用按钮的点击处理函数
+      document.querySelector(".install-btn").addEventListener("click", function () {
+        if (this.classList.contains("launch-btn")) {
+          // 尝试使用不同方式启动应用
+          launchApp();
+        } else {
+          download();
+        }
+      });
+
+      // 添加启动应用的函数
+      function launchApp() {
+        // 获取 manifest 中定义的 start_url
+        const startUrl = "/game/index.html";
+        
+        // 尝试多种方式启动应用
+        if ('startViewTransition' in document) {
+          // 如果支持 View Transitions API，使用它来实现平滑过渡
+          document.startViewTransition(() => {
+            window.location.href = startUrl;
+          });
+        } else {
+          // 1. 尝试使用 PWA protocol handler
+          try {
+            window.location.href = `web+pwa://catch_fish_2131243535${startUrl}`;
+          } catch (e) {
+            // 2. 降级方案：直接跳转到 start_url
+            try {
+              window.location.href = startUrl;
+            } catch (e) {
+              // 3. 最后的降级方案：打开新窗口
+              window.open(startUrl, '_blank');
+            }
           }
-        });
+        }
+      }
 
       // 监听 app 安装完成事件
       window.addEventListener('appinstalled', (event) => {
@@ -482,28 +507,35 @@
         }
       });
 
-      // 在现有的 script 标签中添加以下函数
+      // 修改 checkInstalledStatus 函数，添加启动方式检测
       async function checkInstalledStatus() {
         const installBtn = document.querySelector(".install-btn");
         
-        // 检查是否支持 getInstalledRelatedApps API
         if ('getInstalledRelatedApps' in navigator) {
           try {
             const relatedApps = await navigator.getInstalledRelatedApps();
-            
-            // 检查是否找到已安装的应用
             const isInstalled = relatedApps.some(app => app.id === 'catch_fish_2131243535');
             
             if (isInstalled) {
               console.log('应用已安装');
               installBtn.innerHTML = "启动应用";
               installBtn.classList.add("launch-btn");
+              
+              // 检查是否支持 protocol handler
+              try {
+                await navigator.registerProtocolHandler('web+pwa',
+                  `${window.location.origin}/%s`,
+                  'PWA Handler'
+                );
+              } catch (e) {
+                console.log('Protocol handler 注册失败:', e);
+              }
             }
           } catch (error) {
             console.log('检查安装状态时出错:', error);
           }
         } else {
-          // 降级方案：检查是否可以通过 URL Scheme 启动
+          // 降级检查逻辑保持不变
           try {
             const registration = await navigator.serviceWorker.getRegistration();
             if (registration) {
