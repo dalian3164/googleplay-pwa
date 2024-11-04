@@ -1,13 +1,13 @@
 {
-  "name": "游戏名",
-  "short_name": "游戏短名",
+  "name": "GameName",
+  "short_name": "GameShortName",
   "start_url": "/game/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "lang": "en",
   "scope": "/",
   "id": "catch_fish_2131243535",
-  "description": "游戏描述",
+  "description": "GameDescription",
   "theme_color": "#ffffff",
   "icons": [
     {
